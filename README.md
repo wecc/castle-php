@@ -19,7 +19,7 @@ git clone https://github.com/castle/castle-php
 To get started, add the following to your PHP script:
 
 ```php
-require_once("/path/to/castle-php/lib/Castle.php");
+require_once("/path/to/castle-php/src/Castle.php");
 ```
 
 Configure the library with your Castle API secret.

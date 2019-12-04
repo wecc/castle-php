@@ -20,11 +20,11 @@
 
     <!-- Rule exclusions -->
     <rule ref="Generic.Files.LineLength">
-        <exclude-pattern>./test</exclude-pattern>
+        <exclude-pattern>./tests</exclude-pattern>
     </rule>
 
     <!-- Files to be included -->
-    <file>./lib</file>
-    <file>./test</file>
+    <file>./src</file>
+    <file>./tests</file>
 
 </ruleset>

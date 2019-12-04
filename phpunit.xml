@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" bootstrap="test/Castle.php">
+<phpunit colors="true" bootstrap="tests/Castle.php">
   <testsuites>
     <testsuite name="Test Suite">
-      <directory>./test</directory>
+      <directory>./tests</directory>
     </testsuite>
   </testsuites>
   <logging>
@@ -10,11 +10,11 @@
   </logging>
   <filter>
       <whitelist processUncoveredFilesFromWhitelist="true">
-          <directory suffix=".php">./lib/Castle</directory>
-          <directory suffix=".php">./lib/RestModel</directory>
+          <directory suffix=".php">./src/Castle</directory>
+          <directory suffix=".php">./src/RestModel</directory>
           <exclude>
-            <file>./lib/Castle/CookieStore.php</file>
-            <file>./lib/Castle/CurlTransport.php</file>
+            <file>./src/Castle/CookieStore.php</file>
+            <file>./src/Castle/CurlTransport.php</file>
           </exclude>
       </whitelist>
   </filter>

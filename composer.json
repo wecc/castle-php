@@ -15,8 +15,8 @@
   ],
   "autoload": {
     "classmap": [
-      "lib/Castle",
-      "lib/RestModel"
+      "src/Castle",
+      "src/RestModel"
     ]
   },
   "require": {
