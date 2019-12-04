@@ -2,90 +2,87 @@
 
 class CastleRequestTest extends \Castle_TestCase
 {
+    public static function setUpBeforeClass(): void
+    {
+        $_SERVER['HTTP_USER_AGENT'] = 'TestAgent';
+        $_SERVER['REMOTE_ADDR'] = '8.8.8.8';
+        Castle::setApiKey('secretkey');
+        Castle::setCurlOpts([]);
+        Castle::setUseWhitelist(false);
+    }
 
-  public static function setUpBeforeClass(): void
-  {
-    $_SERVER['HTTP_USER_AGENT'] = 'TestAgent';
-    $_SERVER['REMOTE_ADDR'] = '8.8.8.8';
-    Castle::setApiKey('secretkey');
-    Castle::setCurlOpts(array());
-    Castle::setUseWhitelist(false);
-  }
+    public function setUp(): void
+    {
+        $_COOKIE = [];
+        $_SESSION = [];
+    }
 
-  public function setUp(): void
-  {
-    $_COOKIE = array();
-    $_SESSION = array();
-  }
-
-  public function tearDown(): void
-  {
-    Castle_RequestTransport::setResponse();
-  }
+    public function tearDown(): void
+    {
+        Castle_RequestTransport::setResponse();
+    }
 
   /**
    * @expectedException Castle_CurlOptionError
    */
-  public function testCastleCurlOptions()
-  {
-    // Will not throw.
-    Castle::setCurlOpts(array(CURLOPT_CONNECTTIMEOUT => 1,
+    public function testCastleCurlOptions()
+    {
+      // Will not throw.
+        Castle::setCurlOpts([CURLOPT_CONNECTTIMEOUT => 1,
                               CURLOPT_CONNECTTIMEOUT_MS => 1000,
                               CURLOPT_TIMEOUT => 1,
-                              CURLOPT_TIMEOUT_MS => 1000));
-    // Will throw.
-    Castle::setCurlOpts(array(CURLOPT_USERAGENT => "BadBrowser/6.6.6b"));
-  }
-
-
+                              CURLOPT_TIMEOUT_MS => 1000]);
+      // Will throw.
+        Castle::setCurlOpts([CURLOPT_USERAGENT => "BadBrowser/6.6.6b"]);
+    }
 
   /**
    * @expectedException Castle_ApiError
    */
-  public function testInvalidResponse()
-  {
-    Castle_RequestTransport::setResponse(200, '{invalid');
-    $req = new Castle_Request();
-    $req->send('GET', '/users');
-  }
+    public function testInvalidResponse()
+    {
+        Castle_RequestTransport::setResponse(200, '{invalid');
+        $req = new Castle_Request();
+        $req->send('GET', '/users');
+    }
 
   /**
    * @expectedException Castle_ApiError
    */
-  public function testApiErrorRequest()
-  {
-    Castle_RequestTransport::setResponse(500);
-    $req = new Castle_Request();
-    $req->send('GET', '/users');
-  }
+    public function testApiErrorRequest()
+    {
+        Castle_RequestTransport::setResponse(500);
+        $req = new Castle_Request();
+        $req->send('GET', '/users');
+    }
 
   /**
    * @expectedException Castle_UnauthorizedError
    */
-  public function testUnauthorizedRequest()
-  {
-    Castle_RequestTransport::setResponse(401);
-    $req = new Castle_Request();
-    $req->send('GET', '/users');
-  }
+    public function testUnauthorizedRequest()
+    {
+        Castle_RequestTransport::setResponse(401);
+        $req = new Castle_Request();
+        $req->send('GET', '/users');
+    }
 
   /**
    * @expectedException Castle_ForbiddenError
    */
-  public function testForbiddenRequest()
-  {
-    Castle_RequestTransport::setResponse(403);
-    $req = new Castle_Request();
-    $req->send('GET', '/users');
-  }
+    public function testForbiddenRequest()
+    {
+        Castle_RequestTransport::setResponse(403);
+        $req = new Castle_Request();
+        $req->send('GET', '/users');
+    }
 
   /**
    * @expectedException Castle_InvalidParametersError
    */
-  public function testInvalidParametersRequest()
-  {
-    Castle_RequestTransport::setResponse(422);
-    $req = new Castle_Request();
-    $req->send('GET', '/users');
-  }
+    public function testInvalidParametersRequest()
+    {
+        Castle_RequestTransport::setResponse(422);
+        $req = new Castle_Request();
+        $req->send('GET', '/users');
+    }
 }

@@ -2,5 +2,5 @@
 
 class Castle_Authenticate extends RestModel
 {
-  protected $isSingular = true;
+    protected $isSingular = true;
 }
